@@ -63,6 +63,7 @@ class CausalLSTMCellBase(nn.Module):
 
     def run_layer_norm(self, x, ln):
         idx = list(range(self.num_dims + 2))
+        print('idxxxxxxxxxxxx',idx)
         return ln(x.permute(0, *idx[2:], 1)).permute(0, -1, *idx[1:-1])
 
     def init_state(self, x, num_channels):
@@ -103,6 +104,7 @@ class CausalLSTMCellBase(nn.Module):
             f = torch.sigmoid(f_h + f_c + self.forget_bias)
             g = torch.tanh(g_h + g_c)
         else:
+            print('xxxxxxxxxxxxx',x.shape)
             x_cc = self.conv_x(x)
             if self.layer_norm:
                 x_cc = self.run_layer_norm(x_cc, self.ln_x)
@@ -149,7 +151,7 @@ class CausalLSTMCellBase(nn.Module):
 
         return h_new, c_new, m_new
 
-
+#기존 lstm에서, temporal gate c만 넣는게 아니라 spatio gate m을 추가한 내용.
 class CausalLSTMCell2d(CausalLSTMCellBase):
     def __init__(self, filter_size, in_channels, out_channels,
                  forget_bias=1.0, layer_norm=False):
@@ -166,8 +168,8 @@ class CausalLSTMCell2d(CausalLSTMCellBase):
             nn.Conv2d(out_channels, out_channels * 3, filter_size,
                       stride=1, padding=1, padding_mode='replicate')
         self.conv_m = \
-            nn.Conv2d(in_channels, out_channels * 3, filter_size,
-                      stride=1, padding=1, padding_mode='replicate')
+            nn.Conv2d(in_channels, out_channels * 5, filter_size,
+                      stride=1, padding=1, padding_mode='replicate')#원래 3...
         self.conv_x = \
             nn.Conv2d(in_channels, out_channels * 7, filter_size,
                       stride=1, padding=1, padding_mode='replicate')

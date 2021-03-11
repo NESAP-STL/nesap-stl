@@ -17,6 +17,7 @@ def get_data_loaders(name, batch_size, distributed=False,
                      use_dist_sampler_valid=False,
                      **dataset_args):
     """Construct training and validation datasets and data loaders"""
+    #    train_data_loader, valid_data_loader = get_data_loaders(distributed=distributed, **config['data'])
 
     # Get the datasets
     train_dataset, valid_dataset, loader_args = get_datasets(name=name, **dataset_args)

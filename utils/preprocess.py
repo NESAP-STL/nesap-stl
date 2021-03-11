@@ -5,13 +5,14 @@ import numpy as np
 def reshape_patch(img_tensor, patch_size):
     assert 5 == img_tensor.ndim
     batch_size = np.shape(img_tensor)[0]
-    seq_length = np.shape(img_tensor)[1]
+    seq_length = np.shape(img_tensor)[1] #month
     num_channels = np.shape(img_tensor)[2]
-    img_height = np.shape(img_tensor)[3]
-    img_width = np.shape(img_tensor)[4]
-    a = np.reshape(img_tensor, [batch_size, seq_length, num_channels,
-                                img_height//patch_size, patch_size,
-                                img_width//patch_size, patch_size])
+    img_height = np.shape(img_tensor)[3] #latitude
+    img_width = np.shape(img_tensor)[4] #longitude
+    a = np.reshape(img_tensor, [batch_size, seq_length, num_channels,img_height//patch_size, patch_size,img_width//patch_size, patch_size])
+    # The reshape function assumes shape (N, T, C, H, W) n이 배치, t가 시퀀스, c가 채널, h가 세로, w가 가로
+    # but here the sample and sequence dims are merged: (T, H, W)
+    # so we add a temporary dummy batch dim and channel dim: (1, T, 1, H, W)
     b = np.transpose(a, [0,1,2,4,6,3,5])
     patch_tensor = np.reshape(b, [batch_size, seq_length,
                                   num_channels*patch_size*patch_size,

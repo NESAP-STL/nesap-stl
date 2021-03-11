@@ -69,8 +69,7 @@ def main():
 
     # Load the datasets
     distributed = args.distributed_backend is not None
-    train_data_loader, valid_data_loader = get_data_loaders(
-        distributed=distributed, **config['data'])
+    train_data_loader, valid_data_loader = get_data_loaders(distributed=distributed, **config['data'])
 
     # Load the trainer
     gpu = (rank % args.ranks_per_node) if args.rank_gpu else args.gpu

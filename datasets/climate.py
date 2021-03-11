@@ -46,11 +46,11 @@ def get_datasets(data_file, n_train=8192, n_valid=2048, seq_len=36,
 
     FIXME: assumes overlapping sequences in the train/val split.
     """
-    with np.load(data_file) as f:
-        data = f['temp'].astype(np.float32)
-
+    """with np.load(data_file) as f:
+        data = f['temp'].astype(np.float32)"""
+    data = np.load(data_file)
     # Reshape data into patches
-    # The reshape function assumes shape (N, T, C, H, W)
+    # The reshape function assumes shape (N, T, C, H, W) n이 배치, t가 시퀀스, c가 채널, h가 세로, w가 가로
     # but here the sample and sequence dims are merged: (T, H, W)
     # so we add a temporary dummy batch dim and channel dim: (1, T, 1, H, W)
     data = data[None, :, None, :, :]

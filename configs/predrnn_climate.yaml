@@ -1,15 +1,15 @@
 # This config is for testing PredRNN++ on climate data
 # WORK IN PROGRESS
 
-output_dir: $SCRATCH/nesap-stl/predrnn-climate/results_001
+output_dir: /Users/songhune/PycharmProjects/nesap-stl/outcomes/
 
 trainer: auto_regressive
 
 data:
     name: climate
-    data_file: /global/cfs/cdirs/m1759/sfarrell/nesap-stl/data/climate.npz
-    patch_size: 4
-    n_train: 10240
+    data_file: /Users/songhune/PycharmProjects/nesap-stl/data/tosna_data_1yravg.npy
+    patch_size: 5 #원래 4인데 뭔지 모르겠음
+    n_train: 14389
     n_valid: 2048
     seq_len: 16
     batch_size: 4
