@@ -1,6 +1,6 @@
-2021-03-12 04:09:16,078 INFO Initialized rank 0 out of 1
-2021-03-12 04:09:16,078 INFO Configuration: {'output_dir': '/Users/songhune/PycharmProjects/nesap-stl/outcomes/', 'trainer': 'auto_regressive', 'data': {'name': 'climate', 'data_file': '/Users/songhune/PycharmProjects/nesap-stl/data/tosna_data_1yravg.npy', 'patch_size': 5, 'n_train': 14389, 'n_valid': 2048, 'seq_len': 16, 'batch_size': 4}, 'model': {'name': 'predrnn_pp', 'num_hidden': [8, 16, 32, 16]}, 'loss': {'name': 'MSELoss'}, 'optimizer': {'name': 'Adam', 'lr': 0.001}, 'train': {'n_epochs': 32}}
-2021-03-12 04:09:18,950 INFO PredRNNPP(
+2021-04-02 00:50:04,523 INFO Initialized rank 0 out of 1
+2021-04-02 00:50:04,524 INFO Configuration: {'output_dir': '/Users/songhune/PycharmProjects/nesap-stl/outcomes/', 'trainer': 'auto_regressive', 'data': {'name': 'climate', 'data_file': '/Users/songhune/PycharmProjects/nesap-stl/data/tosna_data_1yravg.npy', 'patch_size': 5, 'n_train': 14389, 'n_valid': 2048, 'seq_len': 16, 'batch_size': 4}, 'model': {'name': 'predrnn_pp', 'num_hidden': [8, 16, 32, 16]}, 'loss': {'name': 'MSELoss'}, 'optimizer': {'name': 'Adam', 'lr': 0.001}, 'train': {'n_epochs': 32}}
+2021-04-02 00:50:09,318 INFO PredRNNPP(
   (clstm): CausalLSTMStack(
     (lstms): ModuleList(
       (0): CausalLSTMCell2d(
@@ -73,5 +73,5 @@
   )
   (decoder): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1))
 )
-2021-03-12 04:09:18,954 INFO Number of parameters: 321880
-2021-03-12 04:09:18,955 INFO Epoch 0
+2021-04-02 00:50:09,321 INFO Number of parameters: 321880
+2021-04-02 00:50:09,321 INFO Epoch 0

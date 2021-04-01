@@ -75,8 +75,7 @@ def main():
     gpu = (rank % args.ranks_per_node) if args.rank_gpu else args.gpu
     if gpu is not None:
         logging.info('Using GPU %i', gpu)
-    trainer = get_trainer(name=config['trainer'], distributed=distributed,
-                          rank=rank, output_dir=output_dir, gpu=gpu)
+    trainer = get_trainer(name=config['trainer'], distributed=distributed,rank=rank, output_dir=output_dir, gpu=gpu)
 
     # Build the model and optimizer
     trainer.build(config)
@@ -86,9 +85,7 @@ def main():
         trainer.load_checkpoint()
 
     # Run the training
-    summary = trainer.train(train_data_loader=train_data_loader,
-                            valid_data_loader=valid_data_loader,
-                            **config['train'])
+    summary = trainer.train(train_data_loader=train_data_loader,valid_data_loader=valid_data_loader, **config['train'])
 
     # Print some conclusions
     try_barrier()
