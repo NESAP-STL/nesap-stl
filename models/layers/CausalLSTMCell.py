@@ -17,7 +17,7 @@ class CausalLSTMCellBase(nn.Module):
         out_channels:
             number of units for output tensor.
         seq_shape:
-            shape of a sequence.
+            shape of a sequence. doesn't exists
         forget_bias: float
             The bias added to forget gates.
         layer_norm:
@@ -32,13 +32,13 @@ class CausalLSTMCellBase(nn.Module):
         self.layer_norm = layer_norm
         self.forget_bias = forget_bias
 
-        self.conv_h = None
-        self.conv_c = None
-        self.conv_m = None
-        self.conv_x = None
-        self.conv_c2 = None
-        self.conv_o = None
-        self.conv_h2 = None
+        self.conv_h = None #r
+        self.conv_c = None #o
+        self.conv_m = None #y
+        self.conv_x = None #g
+        self.conv_c2 = None #b
+        self.conv_o = None #n
+        self.conv_h2 = None #p , under influence by b and concatenated y and triangle_red
 
         self.ln_h = nn.LayerNorm(out_channels * 4, elementwise_affine=True)
         self.ln_c = nn.LayerNorm(out_channels * 3, elementwise_affine=True)
@@ -52,7 +52,7 @@ class CausalLSTMCellBase(nn.Module):
     def init_conv(self):
         if not self.init_val:
             return
-
+        #시작할 때, uniform distribution으로 시작
         nn.init.uniform_(self.conv_h.weight, -self.init_val, self.init_val)
         nn.init.uniform_(self.conv_c.weight, -self.init_val, self.init_val)
         nn.init.uniform_(self.conv_m.weight, -self.init_val, self.init_val)
@@ -63,7 +63,7 @@ class CausalLSTMCellBase(nn.Module):
 
     def run_layer_norm(self, x, ln):
         idx = list(range(self.num_dims + 2))
-        print('idxxxxxxxxxxxx',idx)
+
         return ln(x.permute(0, *idx[2:], 1)).permute(0, -1, *idx[1:-1])
 
     def init_state(self, x, num_channels):
@@ -90,12 +90,15 @@ class CausalLSTMCellBase(nn.Module):
         c_cc = self.conv_c(c)
         m_cc = self.conv_m(m)
 
-        if self.layer_norm:
+        if self.layer_norm: #is true
             h_cc = self.run_layer_norm(h_cc, self.ln_h)
             c_cc = self.run_layer_norm(c_cc, self.ln_c)
+            print('여긴 되니1')
             m_cc = self.run_layer_norm(m_cc, self.ln_m)
+            print('여긴 되니2')
 
         i_h, g_h, f_h, o_h = torch.split(h_cc, self.out_channels, 1)
+
         i_c, g_c, f_c = torch.split(c_cc, self.out_channels, 1)
         i_m, f_m, m_m = torch.split(m_cc, self.out_channels, 1)
 
@@ -104,7 +107,7 @@ class CausalLSTMCellBase(nn.Module):
             f = torch.sigmoid(f_h + f_c + self.forget_bias)
             g = torch.tanh(g_h + g_c)
         else:
-            print('xxxxxxxxxxxxx',x.shape)
+
             x_cc = self.conv_x(x)
             if self.layer_norm:
                 x_cc = self.run_layer_norm(x_cc, self.ln_x)

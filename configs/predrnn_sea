@@ -1,5 +1,5 @@
-# This config is for testing PredRNN++ on climate data
-# WORK IN PROGRESS
+# This config is for testing PredRNN++ on sea data, ongoing, need to change directory if you want
+
 
 output_dir: /Users/songhune/PycharmProjects/nesap-stl/outcomes/
 
@@ -16,7 +16,8 @@ data:
 
 model:
     name: predrnn_pp
-    num_hidden: [8, 16, 32, 16]
+    #num_hidden: [8, 16, 32, 16]
+    num_hidden: [128, 64, 64, 64]
     #num_hidden: [128, 64, 64, 64, 16]
 
 loss:
