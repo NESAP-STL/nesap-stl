@@ -8,7 +8,7 @@ trainer: auto_regressive
 data:
     name: climate
     data_file: D:\Download\climate\data\tosna_data_1yravg.npy
-    patch_size: 5 #4
+    patch_size: 4
     n_train: 14389
     n_valid: 2048
     seq_len: 16
