@@ -27,6 +27,7 @@ class CausalLSTMCellBase(nn.Module):
 
         self.filter_size = filter_size
         self.in_channels = in_channels
+        #print('inchannels',in_channels)
         self.out_channels = out_channels
 
         self.layer_norm = layer_norm
@@ -75,8 +76,7 @@ class CausalLSTMCellBase(nn.Module):
             raise ValueError('input tensor should be rank {}.'.format(
                 self.num_dims + 2))
 
-        return torch.zeros([b, num_channels, *rest],
-                           dtype=x.dtype, device=x.device)
+        return torch.zeros([b, num_channels, *rest], dtype=x.dtype, device=x.device)
 
     def forward(self, x, h=None, c=None, m=None):
         if h is None:
@@ -85,7 +85,7 @@ class CausalLSTMCellBase(nn.Module):
             c = self.init_state(x, self.out_channels)
         if m is None:
             m = self.init_state(x, self.in_channels)
-
+            #print('mshape!!!!!!!!',m.shape)
         h_cc = self.conv_h(h)
         c_cc = self.conv_c(c)
         m_cc = self.conv_m(m)
@@ -93,9 +93,9 @@ class CausalLSTMCellBase(nn.Module):
         if self.layer_norm: #is true
             h_cc = self.run_layer_norm(h_cc, self.ln_h)
             c_cc = self.run_layer_norm(c_cc, self.ln_c)
-            print('여긴 되니1')
+            #print('여긴 되니1')
             m_cc = self.run_layer_norm(m_cc, self.ln_m)
-            print('여긴 되니2')
+            #print('여긴 되니2')
 
         i_h, g_h, f_h, o_h = torch.split(h_cc, self.out_channels, 1)
 
@@ -171,8 +171,8 @@ class CausalLSTMCell2d(CausalLSTMCellBase):
             nn.Conv2d(out_channels, out_channels * 3, filter_size,
                       stride=1, padding=1, padding_mode='replicate')
         self.conv_m = \
-            nn.Conv2d(in_channels, out_channels * 5, filter_size,
-                      stride=1, padding=1, padding_mode='replicate')#원래 3...
+            nn.Conv2d(in_channels, out_channels * 3, filter_size,
+                      stride=1, padding=1, padding_mode='replicate')
         self.conv_x = \
             nn.Conv2d(in_channels, out_channels * 7, filter_size,
                       stride=1, padding=1, padding_mode='replicate')

@@ -47,7 +47,7 @@ class GHUBase(nn.Module):
     def forward(self, x, z=None):
         if z is None:
             z = self.init_state(x, self.num_channels)
-            print('zzzzzzzzzzzzz',z)
+            #print('zzzzzzzzzzzzz',z)
 
         z_concat = self.conv_z(z)
         x_concat = self.conv_x(x)

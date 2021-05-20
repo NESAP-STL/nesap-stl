@@ -9,6 +9,8 @@ def reshape_patch(img_tensor, patch_size):
     num_channels = np.shape(img_tensor)[2]
     img_height = np.shape(img_tensor)[3] #latitude
     img_width = np.shape(img_tensor)[4] #longitude
+    #print('major param: batch:',batch_size,'seq:',seq_length,
+    #      'num_channels:',num_channels,'img height:',img_height,'img width',img_width,'patch size',patch_size)
     a = np.reshape(img_tensor, [batch_size, seq_length, num_channels,img_height//patch_size, patch_size,img_width//patch_size, patch_size])
     # The reshape function assumes shape (N, T, C, H, W) n이 배치, t가 시퀀스, c가 채널, h가 세로, w가 가로
     # but here the sample and sequence dims are merged: (T, H, W)
@@ -18,6 +20,9 @@ def reshape_patch(img_tensor, patch_size):
                                   num_channels*patch_size*patch_size,
                                   img_height//patch_size,
                                   img_width//patch_size])
+
+    #print('img channels!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',num_channels)
+
     return patch_tensor
 
 def reshape_patch_back(patch_tensor, patch_size):

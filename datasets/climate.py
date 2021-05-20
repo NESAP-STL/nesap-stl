@@ -40,7 +40,7 @@ class ClimateDataset(torch.utils.data.Dataset):
         x = torch.from_numpy(self.data[index : index + self.seq_len])
         return x
 
-def get_datasets(data_file, n_train=8192, n_valid=2048, seq_len=36,
+def get_datasets(data_file, n_train=1280, n_valid=128, seq_len=36,
                  patch_size=1, **kwargs):
     """Factory function for the datasets.
 
@@ -53,7 +53,7 @@ def get_datasets(data_file, n_train=8192, n_valid=2048, seq_len=36,
     # The reshape function assumes shape (N, T, C, H, W) n이 배치, t가 시퀀스, c가 채널, h가 세로, w가 가로
     # but here the sample and sequence dims are merged: (T, H, W)
     # so we add a temporary dummy batch dim and channel dim: (1, T, 1, H, W)
-    data = data[None, :, None, :, :]
+    data = data[None, :, None, :-2, :-5]
     data = reshape_patch(data, patch_size)
     # Remove the dummy batch dim
     data = data[0]
