@@ -1,13 +1,13 @@
 # This config is for testing PredRNN++ on climate data
 # WORK IN PROGRESS
 
-output_dir: D:\ttemp\nesap-stl-master\outcomes
+output_dir: /Users/hanseunghyeon/Documents/GitHub/nesap-stl/outcomes
 
 trainer: auto_regressive
 
 data:
     name: climate
-    data_file: D:\ttemp\nesap-stl-master\data\tosna_data_1yravg.npy
+    data_file: /Users/hanseunghyeon/Downloads/data/tosna_data_1yravg.npy
     patch_size: 4
     n_train: 1280
     n_valid: 128

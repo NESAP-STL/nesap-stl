@@ -12,13 +12,13 @@ import logging
 # Externals
 import yaml
 import numpy as np
-
+import torch
 # Locals
 from datasets import get_data_loaders
 from trainers import get_trainer
 from utils.logging import config_logging
 from utils.distributed import init_workers, try_barrier
-
+from models import predrnn_pp
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser()
@@ -37,6 +37,8 @@ def parse_args():
             help='Resume training from last checkpoint')
     add_arg('-v', '--verbose', action='store_true',
             help='Enable verbose logging')
+    add_arg('--chk', action='store_true',
+            help='run testing code')
     return parser.parse_args()
 
 def load_config(config_file):
@@ -85,7 +87,10 @@ def main():
     # Resume from checkpoint
     if args.resume:
         trainer.load_checkpoint()
-
+    if args.chk:
+        model = predrnn_pp.PredRNNPP()
+        model.load_state_dict(torch.load('./outcomes/checkpoint_031.pth.tar',map_location=torch.device('cpu'))['model'])
+        model.eval()
     # Run the training
     summary = trainer.train(train_data_loader=train_data_loader,valid_data_loader=valid_data_loader, **config['train'])
 

@@ -1,0 +1,2 @@
+epoch	train_loss	train_time	valid_loss	valid_acc	valid_time
+0	0	0.017543	0	1	0.013799

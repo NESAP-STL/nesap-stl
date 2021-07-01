@@ -1,2 +1,28 @@
-2021-03-12 01:49:24,605 INFO Initialized rank 0 out of 1
-2021-03-12 01:49:24,605 INFO Configuration: {'trainer': 'hello', 'output_dir': '$SCRATCH/pytorch-examples/hello', 'data': {'name': 'random', 'n_train': 1024, 'n_valid': 1024, 'input_shape': [3, 32, 32], 'target_shape': [], 'n_classes': 10, 'batch_size': 128}, 'model': 'none', 'loss': 'none', 'optimizer': 'none', 'metrics': 'none', 'train': {'n_epochs': 1}}
+2021-07-02 02:01:45,485 INFO Initialized rank 0 out of 1
+2021-07-02 02:01:45,485 INFO Configuration: {'trainer': 'hello', 'output_dir': '$SCRATCH/pytorch-examples/hello', 'data': {'name': 'random', 'n_train': 1024, 'n_valid': 1024, 'input_shape': [3, 32, 32], 'target_shape': [], 'n_classes': 10, 'batch_size': 128}, 'model': 'none', 'loss': 'none', 'optimizer': 'none', 'metrics': 'none', 'train': {'n_epochs': 1}}
+2021-07-02 02:01:46,135 INFO Hello world
+2021-07-02 02:01:46,135 INFO Epoch 0
+2021-07-02 02:01:46,139 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,142 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,144 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,145 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,147 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,149 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,151 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,153 INFO Train batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,153 INFO Processed 8 training batches
+2021-07-02 02:01:46,153 INFO Train: loss 0 time 0.01754
+2021-07-02 02:01:46,155 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,156 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,158 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,160 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,161 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,163 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,165 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,167 INFO Valid batch input torch.Size([128, 3, 32, 32]), target torch.Size([128])
+2021-07-02 02:01:46,167 INFO Processed 8 validation batches
+2021-07-02 02:01:46,167 INFO Valid: loss 0 acc 1 time 0.0138
+2021-07-02 02:01:46,176 INFO Finished training
+2021-07-02 02:01:46,178 INFO Train samples 1024 time 0.0175431 s rate 58370.6 samples/s
+2021-07-02 02:01:46,178 INFO Valid samples 1024 time 0.0137992 s rate 74207.3 samples/s
+2021-07-02 02:01:46,179 INFO All done!
